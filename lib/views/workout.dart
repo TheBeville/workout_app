@@ -14,36 +14,34 @@ class _WorkoutSessionState extends State<WorkoutSession> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Container(
-          width: MediaQuery.of(context).size.width * 0.95,
-          margin: const EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            border: Border.all(color: Theme.of(context).primaryColor, width: 6),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          padding: const EdgeInsets.all(15),
-          height: MediaQuery.of(context).size.height * 0.15,
-          child: const WorkoutExercise(),
-        ),
-        GestureDetector(
-          onTap: () {},
-          child: Container(
-            margin: const EdgeInsets.all(5),
-            decoration: BoxDecoration(
-              border:
-                  Border.all(color: Theme.of(context).primaryColor, width: 6),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            padding: const EdgeInsets.all(15),
-            height: MediaQuery.of(context).size.height * 0.15,
-            child: Column(
-              children: [
-                IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
-                const Text('Add Exercise'),
-              ],
-            ),
-          ),
-        ),
+        const WorkoutExercise(),
+        const WorkoutExercise(),
+        const WorkoutExercise(),
+        // GestureDetector(
+        //   onTap: () {},
+        //   child: Container(
+        //     margin: const EdgeInsets.all(5),
+        //     decoration: BoxDecoration(
+        //       border:
+        //           Border.all(color: Theme.of(context).primaryColor, width: 6),
+        //       borderRadius: BorderRadius.circular(20),
+        //     ),
+        //     padding: const EdgeInsets.all(15),
+        //     height: MediaQuery.of(context).size.height * 0.15,
+        //     child: Column(
+        //       children: [
+        //         IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
+        //         const Text('Add Exercise'),
+        //       ],
+        //     ),
+        //   ),
+        // ),
+        FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: Theme.of(context).primaryColor,
+          child: const Icon(Icons.add),
+          elevation: 2,
+        )
       ],
     );
   }
