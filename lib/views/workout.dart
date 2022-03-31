@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/workout_exercise.dart';
 
 class WorkoutSession extends StatefulWidget {
   const WorkoutSession({Key? key}) : super(key: key);
@@ -13,23 +14,16 @@ class _WorkoutSessionState extends State<WorkoutSession> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        GestureDetector(
-          onTap: () {},
-          child: Container(
-            margin: const EdgeInsets.all(5),
-            decoration: BoxDecoration(
-              border:
-                  Border.all(color: Theme.of(context).primaryColor, width: 6),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            padding: const EdgeInsets.all(15),
-            height: MediaQuery.of(context).size.height * 0.15,
-            child: Row(
-              children: const [
-                Text('Current Set'),
-              ],
-            ),
+        Container(
+          width: MediaQuery.of(context).size.width * 0.95,
+          margin: const EdgeInsets.all(5),
+          decoration: BoxDecoration(
+            border: Border.all(color: Theme.of(context).primaryColor, width: 6),
+            borderRadius: BorderRadius.circular(20),
           ),
+          padding: const EdgeInsets.all(15),
+          height: MediaQuery.of(context).size.height * 0.15,
+          child: const WorkoutExercise(),
         ),
         GestureDetector(
           onTap: () {},
@@ -45,7 +39,7 @@ class _WorkoutSessionState extends State<WorkoutSession> {
             child: Column(
               children: [
                 IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
-                const Text('Add Set'),
+                const Text('Add Exercise'),
               ],
             ),
           ),
