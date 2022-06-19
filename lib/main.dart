@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import './views/workout.dart';
+import 'views/workout_session.dart';
+import 'main_theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,9 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: mainTheme,
       home: const MyHomePage(title: 'Workout'),
     );
   }
@@ -40,44 +39,22 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         centerTitle: true,
         title: Text(widget.title),
         actions: const [
           IconButton(
-              onPressed: null,
-              icon: Icon(
-                Icons.settings,
-                color: Colors.white,
-              ))
+            onPressed: null,
+            icon: Icon(
+              Icons.settings,
+              color: Colors.white,
+            ),
+          ),
         ],
       ),
       body: const Center(
         child: WorkoutSession(),
-
-        // Column(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: <Widget>[
-        //     Row(
-        //       children: [
-        //         const Spacer(),
-        //         const Text('New Workout'),
-        //         Container(width: 16),
-        //         const IconButton(onPressed: null, icon: Icon(Icons.create)),
-        //         const Spacer(),
-        //       ],
-        //     ),
-        //     Row(
-        //       children: [
-        //         const Spacer(),
-        //         const Text('Past Workouts'),
-        //         Container(width: 16),
-        //         const IconButton(onPressed: null, icon: Icon(Icons.history)),
-        //         const Spacer(),
-        //       ],
-        //     ),
-        //   ],
-        // ),
       ),
     );
   }
