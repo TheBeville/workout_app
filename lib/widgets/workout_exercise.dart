@@ -2,19 +2,31 @@ import 'package:flutter/material.dart';
 
 import './rep_button.dart';
 
+// widget for each exercise in a workout session
 class WorkoutExercise extends StatelessWidget {
-  const WorkoutExercise({Key? key}) : super(key: key);
+  final String chosenExercise;
+  final int numOfSets;
+  final int numOfReps;
 
-  static const List<RepButton> setRepList = [
-    RepButton(),
-    RepButton(),
-    RepButton(),
-    RepButton(),
-    RepButton(),
-  ];
+  const WorkoutExercise({
+    Key? key,
+    required this.chosenExercise,
+    required this.numOfSets,
+    required this.numOfReps,
+  }) : super(key: key);
+
+  // TODO: fill list from user-created template
+  List<RepButton> fillRepList() {
+    List<RepButton> setRepList = [];
+    for (int i = 0; i < numOfSets; i++) {
+      setRepList.add(RepButton(numOfReps: numOfReps));
+    }
+    return setRepList;
+  }
 
   @override
   Widget build(BuildContext context) {
+    // TODO: tidy up/refactor to replace all these media queries
     return Container(
       width: MediaQuery.of(context).size.width * 0.95,
       margin: const EdgeInsets.all(5),
@@ -27,14 +39,14 @@ class WorkoutExercise extends StatelessWidget {
       child: Row(
         children: [
           SizedBox(
-              child: const Text('Chosen Exercise',
-                  style: TextStyle(color: Colors.white)),
+              child: Text(chosenExercise,
+                  style: const TextStyle(color: Colors.white)),
               width: MediaQuery.of(context).size.width * 0.2),
           Expanded(
             child: ListView(
               scrollDirection: Axis.horizontal,
               shrinkWrap: true,
-              children: setRepList,
+              children: fillRepList(),
             ),
           ),
         ],

@@ -11,9 +11,21 @@ class WorkoutSession extends StatefulWidget {
 class _WorkoutSessionState extends State<WorkoutSession> {
   List<WorkoutExercise> currentSessionExerciseList = [
     // TODO: populate list with user-selected sets and reps etc.
-    const WorkoutExercise(),
-    const WorkoutExercise(),
-    const WorkoutExercise(),
+    const WorkoutExercise(
+      chosenExercise: 'Barbell Squat',
+      numOfSets: 5,
+      numOfReps: 5,
+    ),
+    const WorkoutExercise(
+      chosenExercise: 'Bench Press',
+      numOfSets: 3,
+      numOfReps: 8,
+    ),
+    const WorkoutExercise(
+      chosenExercise: 'Deadlift',
+      numOfSets: 6,
+      numOfReps: 3,
+    ),
   ];
 
   @override
@@ -28,7 +40,11 @@ class _WorkoutSessionState extends State<WorkoutSession> {
           onPressed: () {
             setState(
               () {
-                currentSessionExerciseList.add(const WorkoutExercise());
+                currentSessionExerciseList.add(const WorkoutExercise(
+                  chosenExercise: 'Bicep Curl',
+                  numOfSets: 4,
+                  numOfReps: 12,
+                ));
               },
             );
           },
