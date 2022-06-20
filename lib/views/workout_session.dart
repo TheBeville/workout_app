@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/workout_exercise.dart';
+import '../widgets/add_exercise.dart';
 
 class WorkoutSession extends StatefulWidget {
   const WorkoutSession({Key? key}) : super(key: key);
@@ -37,17 +38,23 @@ class _WorkoutSessionState extends State<WorkoutSession> {
           children: currentSessionExerciseList,
         ),
         TextButton(
-          onPressed: () {
-            setState(
-              () {
-                currentSessionExerciseList.add(const WorkoutExercise(
-                  chosenExercise: 'Bicep Curl',
-                  numOfSets: 4,
-                  numOfReps: 12,
-                ));
-              },
-            );
-          },
+          // brings up AlertDialog to choose exercise to add to session
+          onPressed: () => showDialog(
+            context: context,
+            builder: (BuildContext context) => const AddExercise(),
+          ),
+
+          // () {
+          //   setState(
+          //     () {
+          //       currentSessionExerciseList.add(const WorkoutExercise(
+          //         chosenExercise: 'Bicep Curl',
+          //         numOfSets: 4,
+          //         numOfReps: 12,
+          //       ));
+          //     },
+          //   );
+          // },
           child: const Icon(Icons.add),
         )
       ],
