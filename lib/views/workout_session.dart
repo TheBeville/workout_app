@@ -29,6 +29,8 @@ class _WorkoutSessionState extends State<WorkoutSession> {
     ),
   ];
 
+  // late WorkoutExercise _addExercise;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -39,24 +41,25 @@ class _WorkoutSessionState extends State<WorkoutSession> {
         ),
         TextButton(
           // brings up AlertDialog to choose exercise to add to session
-          onPressed: () => showDialog(
-            context: context,
-            builder: (BuildContext context) => const AddExercise(),
-          ),
-
-          // () {
-          //   setState(
-          //     () {
-          //       currentSessionExerciseList.add(const WorkoutExercise(
-          //         chosenExercise: 'Bicep Curl',
-          //         numOfSets: 4,
-          //         numOfReps: 12,
-          //       ));
-          //     },
-          //   );
-          // },
+          onPressed: () async {
+            String _dropdownValue = await showDialog(
+              context: context,
+              builder: (BuildContext context) => const AddExercise(),
+            );
+            setState(
+              () {
+                currentSessionExerciseList.add(
+                  WorkoutExercise(
+                    chosenExercise: _dropdownValue,
+                    numOfSets: 5,
+                    numOfReps: 5,
+                  ),
+                );
+              },
+            );
+          },
           child: const Icon(Icons.add),
-        )
+        ),
       ],
     );
   }

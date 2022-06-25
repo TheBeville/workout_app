@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../views/workout_session.dart';
 
 class AddExercise extends StatefulWidget {
   const AddExercise({Key? key}) : super(key: key);
@@ -9,7 +8,7 @@ class AddExercise extends StatefulWidget {
 }
 
 class _AddExerciseState extends State<AddExercise> {
-  String dropdownValue = 'Please Select';
+  String _dropdownValue = 'Please Select';
 
   @override
   Widget build(BuildContext context) {
@@ -19,23 +18,27 @@ class _AddExerciseState extends State<AddExercise> {
         mainAxisSize: MainAxisSize.min,
         children: [
           DropdownButton(
-            value: dropdownValue,
+            value: _dropdownValue,
             items: <String>[
               'Please Select',
               'Bench Press',
               'Back Squat',
               'Deadlift',
               'Bicep Curl',
-            ].map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
+            ].map<DropdownMenuItem<String>>(
+              (String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              },
+            ).toList(),
             onChanged: (String? newValue) {
-              setState(() {
-                dropdownValue = newValue!;
-              });
+              setState(
+                () {
+                  _dropdownValue = newValue!;
+                },
+              );
             },
           ),
         ],
@@ -44,14 +47,14 @@ class _AddExerciseState extends State<AddExercise> {
         TextButton(
           child: const Text('Cancel'),
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).pop(null);
           },
         ),
         TextButton(
           child: const Text('Done'),
           onPressed: () {
             // TODO: add chosen exercise to list of exercises in WorkoutSession
-            Navigator.of(context).pop();
+            Navigator.of(context).pop(_dropdownValue);
           },
         ),
       ],
