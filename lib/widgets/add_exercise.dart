@@ -51,6 +51,7 @@ class _AddExerciseState extends State<AddExercise> {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.2,
                 child: TextFormField(
+                  keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
                     labelText: 'Sets',
@@ -63,6 +64,7 @@ class _AddExerciseState extends State<AddExercise> {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.2,
                 child: TextFormField(
+                  keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
                     labelText: 'Reps',

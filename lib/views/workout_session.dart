@@ -32,35 +32,40 @@ class _WorkoutSessionState extends State<WorkoutSession> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: currentSessionExerciseList,
-        ),
-        TextButton(
-          // brings up AlertDialog to choose exercise to add to session
-          onPressed: () async {
-            ExerciseTileCreationData exerciseTileCreationData =
-                await showDialog(
-              context: context,
-              builder: (BuildContext context) => const AddExercise(),
-            );
-            setState(
-              () {
-                currentSessionExerciseList.add(
-                  WorkoutExercise(
-                    chosenExercise: exerciseTileCreationData.chosenExercise,
-                    numOfSets: exerciseTileCreationData.numberOfSets,
-                    numOfReps: exerciseTileCreationData.numberOfReps,
-                  ),
+    return Align(
+      alignment: Alignment.topCenter,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: currentSessionExerciseList,
+            ),
+            TextButton(
+              // brings up AlertDialog to choose exercise to add to session
+              onPressed: () async {
+                ExerciseTileCreationData exerciseTileCreationData =
+                    await showDialog(
+                  context: context,
+                  builder: (BuildContext context) => const AddExercise(),
+                );
+                setState(
+                  () {
+                    currentSessionExerciseList.add(
+                      WorkoutExercise(
+                        chosenExercise: exerciseTileCreationData.chosenExercise,
+                        numOfSets: exerciseTileCreationData.numberOfSets,
+                        numOfReps: exerciseTileCreationData.numberOfReps,
+                      ),
+                    );
+                  },
                 );
               },
-            );
-          },
-          child: const Icon(Icons.add),
+              child: const Icon(Icons.add),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }
