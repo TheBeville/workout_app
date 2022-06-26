@@ -52,6 +52,7 @@ class _WorkoutSessionState extends State<WorkoutSession> {
                 setState(
                   () {
                     currentSessionExerciseList.add(
+                      // fill WorkoutExercise params w/ data returned from AlertDialog
                       WorkoutExercise(
                         chosenExercise: exerciseTileCreationData.chosenExercise,
                         numOfSets: exerciseTileCreationData.numberOfSets,

@@ -48,6 +48,7 @@ class _AddExerciseState extends State<AddExercise> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              // user enters number of sets
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.2,
                 child: TextFormField(
@@ -61,6 +62,7 @@ class _AddExerciseState extends State<AddExercise> {
                   },
                 ),
               ),
+              // user enters number of reps
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.2,
                 child: TextFormField(
@@ -88,6 +90,7 @@ class _AddExerciseState extends State<AddExercise> {
         TextButton(
           child: const Text('Done'),
           onPressed: () {
+            // send data to WorkoutSession to add instance of WorkoutExercise
             Navigator.of(context).pop(ExerciseTileCreationData(
                 chosenExercise: _dropdownValue,
                 numberOfSets: numberOfSets,

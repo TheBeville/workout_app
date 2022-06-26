@@ -31,7 +31,7 @@ class WorkoutExercise extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.95,
       margin: const EdgeInsets.all(5),
       decoration: BoxDecoration(
-        border: Border.all(color: Theme.of(context).primaryColor, width: 6),
+        border: Border.all(color: Theme.of(context).primaryColor, width: 4),
         borderRadius: BorderRadius.circular(20),
       ),
       padding: const EdgeInsets.all(15),
