@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/workout_exercise.dart';
 import '../widgets/add_exercise.dart';
+import '../model/exercise_tile_creation_data.dart';
 
 class WorkoutSession extends StatefulWidget {
   const WorkoutSession({Key? key}) : super(key: key);
@@ -29,8 +30,6 @@ class _WorkoutSessionState extends State<WorkoutSession> {
     ),
   ];
 
-  // late WorkoutExercise _addExercise;
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -42,7 +41,8 @@ class _WorkoutSessionState extends State<WorkoutSession> {
         TextButton(
           // brings up AlertDialog to choose exercise to add to session
           onPressed: () async {
-            String _dropdownValue = await showDialog(
+            ExerciseTileCreationData exerciseTileCreationData =
+                await showDialog(
               context: context,
               builder: (BuildContext context) => const AddExercise(),
             );
@@ -50,9 +50,9 @@ class _WorkoutSessionState extends State<WorkoutSession> {
               () {
                 currentSessionExerciseList.add(
                   WorkoutExercise(
-                    chosenExercise: _dropdownValue,
-                    numOfSets: 5,
-                    numOfReps: 5,
+                    chosenExercise: exerciseTileCreationData.chosenExercise,
+                    numOfSets: exerciseTileCreationData.numberOfSets,
+                    numOfReps: exerciseTileCreationData.numberOfReps,
                   ),
                 );
               },

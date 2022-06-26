@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../model/exercise_tile_creation_data.dart';
 
 class AddExercise extends StatefulWidget {
   const AddExercise({Key? key}) : super(key: key);
@@ -9,6 +10,8 @@ class AddExercise extends StatefulWidget {
 
 class _AddExerciseState extends State<AddExercise> {
   String _dropdownValue = 'Please Select';
+  late int numberOfSets;
+  late int numberOfReps;
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +20,7 @@ class _AddExerciseState extends State<AddExercise> {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          // user selects exercise
           DropdownButton(
             value: _dropdownValue,
             items: <String>[
@@ -41,6 +45,35 @@ class _AddExerciseState extends State<AddExercise> {
               );
             },
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.2,
+                child: TextFormField(
+                  decoration: const InputDecoration(
+                    border: UnderlineInputBorder(),
+                    labelText: 'Sets',
+                  ),
+                  onChanged: (value) {
+                    numberOfSets = int.parse(value);
+                  },
+                ),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.2,
+                child: TextFormField(
+                  decoration: const InputDecoration(
+                    border: UnderlineInputBorder(),
+                    labelText: 'Reps',
+                  ),
+                  onChanged: (value) {
+                    numberOfReps = int.parse(value);
+                  },
+                ),
+              ),
+            ],
+          ),
         ],
       ),
       actions: [
@@ -53,8 +86,10 @@ class _AddExerciseState extends State<AddExercise> {
         TextButton(
           child: const Text('Done'),
           onPressed: () {
-            // TODO: add chosen exercise to list of exercises in WorkoutSession
-            Navigator.of(context).pop(_dropdownValue);
+            Navigator.of(context).pop(ExerciseTileCreationData(
+                chosenExercise: _dropdownValue,
+                numberOfSets: numberOfSets,
+                numberOfReps: numberOfReps));
           },
         ),
       ],
