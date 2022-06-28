@@ -3,23 +3,23 @@ import 'package:flutter/material.dart';
 import './rep_button.dart';
 
 // widget for each exercise in a workout session
-class WorkoutExercise extends StatelessWidget {
+class ExerciseTile extends StatelessWidget {
   final String chosenExercise;
-  final int numOfSets;
-  final int numOfReps;
+  final int numberOfSets;
+  final int numberOfReps;
 
-  const WorkoutExercise({
+  const ExerciseTile({
     Key? key,
     required this.chosenExercise,
-    required this.numOfSets,
-    required this.numOfReps,
+    required this.numberOfSets,
+    required this.numberOfReps,
   }) : super(key: key);
 
   // TODO: fill list from user-created template
   List<RepButton> fillRepList() {
     List<RepButton> setRepList = [];
-    for (int i = 0; i < numOfSets; i++) {
-      setRepList.add(RepButton(numOfReps: numOfReps));
+    for (int i = 0; i < numberOfSets; i++) {
+      setRepList.add(RepButton(numOfReps: numberOfReps));
     }
     return setRepList;
   }

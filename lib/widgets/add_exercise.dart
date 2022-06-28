@@ -9,7 +9,7 @@ class AddExercise extends StatefulWidget {
 }
 
 class _AddExerciseState extends State<AddExercise> {
-  String _dropdownValue = 'Please Select';
+  String chosenExercise = 'Please Select';
   late int numberOfSets;
   late int numberOfReps;
 
@@ -22,7 +22,7 @@ class _AddExerciseState extends State<AddExercise> {
         children: [
           // user selects exercise
           DropdownButton(
-            value: _dropdownValue,
+            value: chosenExercise,
             items: <String>[
               'Please Select',
               'Bench Press',
@@ -40,7 +40,7 @@ class _AddExerciseState extends State<AddExercise> {
             onChanged: (String? newValue) {
               setState(
                 () {
-                  _dropdownValue = newValue!;
+                  chosenExercise = newValue!;
                 },
               );
             },
@@ -91,10 +91,13 @@ class _AddExerciseState extends State<AddExercise> {
           child: const Text('Done'),
           onPressed: () {
             // send data to WorkoutSession to add instance of WorkoutExercise
-            Navigator.of(context).pop(ExerciseTileCreationData(
-                chosenExercise: _dropdownValue,
+            Navigator.of(context).pop(
+              ExerciseTileCreationData(
+                chosenExercise: chosenExercise,
                 numberOfSets: numberOfSets,
-                numberOfReps: numberOfReps));
+                numberOfReps: numberOfReps,
+              ),
+            );
           },
         ),
       ],

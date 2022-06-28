@@ -11,24 +11,43 @@ class WorkoutSession extends StatefulWidget {
 }
 
 class _WorkoutSessionState extends State<WorkoutSession> {
-  List<WorkoutExercise> currentSessionExerciseList = [
+  List<ExerciseTile> currentSessionExerciseList = [
     // TODO: populate list with user-selected sets and reps etc.
-    const WorkoutExercise(
+    const ExerciseTile(
       chosenExercise: 'Barbell Squat',
-      numOfSets: 5,
-      numOfReps: 5,
+      numberOfSets: 5,
+      numberOfReps: 5,
     ),
-    const WorkoutExercise(
+    const ExerciseTile(
       chosenExercise: 'Bench Press',
-      numOfSets: 3,
-      numOfReps: 8,
+      numberOfSets: 3,
+      numberOfReps: 8,
     ),
-    const WorkoutExercise(
+    const ExerciseTile(
       chosenExercise: 'Deadlift',
-      numOfSets: 6,
-      numOfReps: 3,
+      numberOfSets: 6,
+      numberOfReps: 3,
     ),
   ];
+
+  void userSelectExercise() async {
+    ExerciseTileCreationData exerciseTileCreationData = await showDialog(
+      context: context,
+      builder: (BuildContext context) => const AddExercise(),
+    );
+    setState(
+      () {
+        currentSessionExerciseList.add(
+          // fill WorkoutExercise params w/ data returned from AlertDialog
+          ExerciseTile(
+            chosenExercise: exerciseTileCreationData.chosenExercise,
+            numberOfSets: exerciseTileCreationData.numberOfSets,
+            numberOfReps: exerciseTileCreationData.numberOfReps,
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,25 +62,7 @@ class _WorkoutSessionState extends State<WorkoutSession> {
             ),
             TextButton(
               // brings up AlertDialog to choose exercise to add to session
-              onPressed: () async {
-                ExerciseTileCreationData exerciseTileCreationData =
-                    await showDialog(
-                  context: context,
-                  builder: (BuildContext context) => const AddExercise(),
-                );
-                setState(
-                  () {
-                    currentSessionExerciseList.add(
-                      // fill WorkoutExercise params w/ data returned from AlertDialog
-                      WorkoutExercise(
-                        chosenExercise: exerciseTileCreationData.chosenExercise,
-                        numOfSets: exerciseTileCreationData.numberOfSets,
-                        numOfReps: exerciseTileCreationData.numberOfReps,
-                      ),
-                    );
-                  },
-                );
-              },
+              onPressed: userSelectExercise,
               child: const Icon(Icons.add),
             ),
           ],
