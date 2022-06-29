@@ -20,12 +20,12 @@ class _WorkoutSessionState extends State<WorkoutSession> {
     ),
     const ExerciseTile(
       chosenExercise: 'Bench Press',
-      numberOfSets: 3,
+      numberOfSets: 5,
       numberOfReps: 8,
     ),
     const ExerciseTile(
       chosenExercise: 'Deadlift',
-      numberOfSets: 6,
+      numberOfSets: 5,
       numberOfReps: 3,
     ),
   ];
