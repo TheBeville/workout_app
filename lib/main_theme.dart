@@ -5,4 +5,8 @@ ThemeData mainTheme = ThemeData(
   backgroundColor: const Color(0xFF232937),
   iconTheme: const IconThemeData(color: Color((0xFF33B0F2))),
   appBarTheme: const AppBarTheme(color: Color(0xFF33B0F2)),
+  textTheme: const TextTheme().apply(
+    bodyColor: Colors.white,
+    displayColor: Colors.white,
+  ),
 );

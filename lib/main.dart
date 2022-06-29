@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'views/workout_session.dart';
 import 'main_theme.dart';
+import './views/settings_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,10 +32,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  void _doSomething() {
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called
@@ -43,10 +40,17 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(widget.title),
-        actions: const [
+        actions: [
           IconButton(
-            onPressed: null,
-            icon: Icon(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Settings(),
+                ),
+              );
+            },
+            icon: const Icon(
               Icons.settings,
               color: Colors.white,
             ),
