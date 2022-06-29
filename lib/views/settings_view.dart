@@ -9,6 +9,8 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+  late List<bool> isSelected = [true, false, false];
+
   @override
   Widget build(BuildContext context) {
     return Theme(
@@ -21,11 +23,42 @@ class _SettingsState extends State<Settings> {
             'Settings',
           ),
         ),
-        body: const Center(
-          child: Text(
-            'The Settings Page',
-            style: TextStyle(color: Colors.white),
-          ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'The Settings Page',
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ToggleButtons(
+                  children: const [
+                    Icon(Icons.sunny),
+                    Icon(Icons.dark_mode),
+                    Icon(Icons.tune)
+                  ],
+                  isSelected: isSelected,
+                  onPressed: (int index) {
+                    setState(() {
+                      for (int buttonIndex = 0;
+                          buttonIndex < isSelected.length;
+                          buttonIndex++) {
+                        if (buttonIndex == index) {
+                          isSelected[buttonIndex] = true;
+                        } else {
+                          isSelected[buttonIndex] = false;
+                        }
+                      }
+                    });
+                  },
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
