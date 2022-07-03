@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'views/workout_session.dart';
 import 'main_theme.dart';
@@ -11,13 +12,22 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  static final ValueNotifier<ThemeMode> themeNotifier =
+      ValueNotifier(ThemeMode.dark);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: mainTheme,
-      home: const MyHomePage(title: 'Workout'),
+    return ValueListenableBuilder(
+      valueListenable: themeNotifier,
+      builder: (state, ThemeMode currentMode, __) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Demo',
+          theme: ThemeClass.mainThemeLight,
+          darkTheme: ThemeClass.mainThemeDark,
+          home: const MyHomePage(title: 'Workout'),
+        );
+      },
     );
   }
 }
@@ -32,6 +42,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  late Future<bool> _isDark;
+
+  @override
+  void initState() {
+    super.initState();
+    _isDark = _prefs
+        .then((SharedPreferences prefs) => prefs.getBool('isDark') ?? false);
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called

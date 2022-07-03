@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:workout_app/main.dart';
 import 'package:workout_app/main_theme.dart';
 
 class Settings extends StatefulWidget {
@@ -9,12 +12,26 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
-  late List<bool> isSelected = [true, false, false];
+  late List<bool> isSelected = [false, true];
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  late Future<bool> _isDark;
+
+  Future<void> _setTheme() async {
+    final SharedPreferences prefs = await _prefs;
+    final bool isDark = (prefs.getBool('isDark') ?? false);
+
+    setState(
+      () {
+        _isDark =
+            prefs.setBool('isDark', isDark).then((bool success) => isDark);
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: mainTheme,
+      data: Theme.of(context),
       child: Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
@@ -26,34 +43,21 @@ class _SettingsState extends State<Settings> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                'The Settings Page',
-              ),
-            ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ToggleButtons(
-                  children: const [
-                    Icon(Icons.sunny),
-                    Icon(Icons.dark_mode),
-                    Icon(Icons.tune)
-                  ],
-                  isSelected: isSelected,
-                  onPressed: (int index) {
-                    setState(() {
-                      for (int buttonIndex = 0;
-                          buttonIndex < isSelected.length;
-                          buttonIndex++) {
-                        if (buttonIndex == index) {
-                          isSelected[buttonIndex] = true;
-                        } else {
-                          isSelected[buttonIndex] = false;
-                        }
-                      }
-                    });
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'Dark Mode: ',
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(MyApp.themeNotifier.value == ThemeMode.light
+                      ? Icons.sunny
+                      : Icons.dark_mode),
+                  onPressed: () {
+                    MyApp.themeNotifier.value =
+                        _setTheme == _isDark ? ThemeMode.dark : ThemeMode.light;
                   },
                 ),
               ],

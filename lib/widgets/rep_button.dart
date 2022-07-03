@@ -42,8 +42,9 @@ class _RepButtonState extends State<RepButton> {
         style: ElevatedButton.styleFrom(
           shape: const CircleBorder(),
           padding: const EdgeInsets.all(20),
-          primary:
-              isComplete ? mainTheme.primaryColor : mainTheme.backgroundColor,
+          primary: isComplete
+              ? Theme.of(context).primaryColor
+              : Theme.of(context).backgroundColor,
           side: BorderSide(
             width: 2.0,
             color: Theme.of(context).primaryColor,
