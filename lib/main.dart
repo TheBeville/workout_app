@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 
 import 'views/workout_session.dart';
 import 'main_theme.dart';
@@ -9,25 +10,47 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   static final ValueNotifier<ThemeMode> themeNotifier =
-      ValueNotifier(ThemeMode.dark);
+      ValueNotifier(ThemeMode.light);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  DarkThemeProvider themeChangeProvider = DarkThemeProvider();
+
+  void getCurrentAppTheme() async {
+    themeChangeProvider.darkTheme =
+        await themeChangeProvider.darkThemePreference.getTheme();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentAppTheme();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: themeNotifier,
-      builder: (state, ThemeMode currentMode, __) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          theme: ThemeClass.mainThemeLight,
-          darkTheme: ThemeClass.mainThemeDark,
-          home: const MyHomePage(title: 'Workout'),
-        );
+    return ChangeNotifierProvider(
+      create: (_) {
+        return themeChangeProvider;
       },
+      child: Consumer<DarkThemeProvider>(
+        builder: (BuildContext context, value, child) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo',
+            theme: ThemeClass.themeData(themeChangeProvider.darkTheme, context),
+            darkTheme: ThemeClass.mainThemeDark,
+            home: const MyHomePage(title: 'Workout'),
+          );
+        },
+      ),
     );
   }
 }
@@ -42,16 +65,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-  late Future<bool> _isDark;
-
-  @override
-  void initState() {
-    super.initState();
-    _isDark = _prefs
-        .then((SharedPreferences prefs) => prefs.getBool('isDark') ?? false);
-  }
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called

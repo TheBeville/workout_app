@@ -39,8 +39,9 @@ class ExerciseTile extends StatelessWidget {
       child: Row(
         children: [
           SizedBox(
-              child: Text(chosenExercise,
-                  style: const TextStyle(color: Colors.white)),
+              child: Text(
+                chosenExercise,
+              ),
               width: MediaQuery.of(context).size.width * 0.2),
           Expanded(
             child: ListView(

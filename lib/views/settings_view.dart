@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 
-import 'package:workout_app/main.dart';
 import 'package:workout_app/main_theme.dart';
 
 class Settings extends StatefulWidget {
@@ -12,24 +12,10 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
-  late List<bool> isSelected = [false, true];
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-  late Future<bool> _isDark;
-
-  Future<void> _setTheme() async {
-    final SharedPreferences prefs = await _prefs;
-    final bool isDark = (prefs.getBool('isDark') ?? false);
-
-    setState(
-      () {
-        _isDark =
-            prefs.setBool('isDark', isDark).then((bool success) => isDark);
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    final themeChange = Provider.of<DarkThemeProvider>(context);
+
     return Theme(
       data: Theme.of(context),
       child: Scaffold(
@@ -51,15 +37,21 @@ class _SettingsState extends State<Settings> {
                     'Dark Mode: ',
                   ),
                 ),
-                IconButton(
-                  icon: Icon(MyApp.themeNotifier.value == ThemeMode.light
-                      ? Icons.sunny
-                      : Icons.dark_mode),
-                  onPressed: () {
-                    MyApp.themeNotifier.value =
-                        _setTheme == _isDark ? ThemeMode.dark : ThemeMode.light;
-                  },
-                ),
+                Checkbox(
+                    value: themeChange.darkTheme,
+                    onChanged: (bool? value) {
+                      themeChange.darkTheme = value!;
+                    })
+                // IconButton(
+                //   icon: Icon(themeChange == ThemeMode.light
+                //       ? Icons.sunny
+                //       : Icons.dark_mode),
+                //   onPressed: () {
+                //     setState(() {
+                //       themeChange.darkTheme;
+                //     });
+                //   },
+                // ),
               ],
             ),
           ],

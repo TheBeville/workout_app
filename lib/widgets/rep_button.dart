@@ -38,7 +38,14 @@ class _RepButtonState extends State<RepButton> {
       child: ElevatedButton(
         onLongPress: reset,
         onPressed: buttonLogic,
-        child: Text(repCounter.toString()),
+        child: Text(
+          repCounter.toString(),
+          style: TextStyle(
+            color: isComplete
+                ? Theme.of(context).backgroundColor
+                : Theme.of(context).primaryColor,
+          ),
+        ),
         style: ElevatedButton.styleFrom(
           shape: const CircleBorder(),
           padding: const EdgeInsets.all(20),

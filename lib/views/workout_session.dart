@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workout_app/main_theme.dart';
 import '../widgets/workout_exercise.dart';
 import '../widgets/add_exercise.dart';
 import '../model/exercise_tile_creation_data.dart';
@@ -63,7 +64,9 @@ class _WorkoutSessionState extends State<WorkoutSession> {
             TextButton(
               // brings up AlertDialog to choose exercise to add to session
               onPressed: userSelectExercise,
-              child: const Icon(Icons.add),
+              child: const Icon(
+                Icons.add,
+              ),
             ),
           ],
         ),
