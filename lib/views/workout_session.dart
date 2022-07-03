@@ -64,8 +64,9 @@ class _WorkoutSessionState extends State<WorkoutSession> {
             TextButton(
               // brings up AlertDialog to choose exercise to add to session
               onPressed: userSelectExercise,
-              child: const Icon(
+              child: Icon(
                 Icons.add,
+                color: Theme.of(context).primaryColor,
               ),
             ),
           ],
