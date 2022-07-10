@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workout_app/controller/session_controller.dart';
-import 'package:workout_app/main_theme.dart';
 import 'package:workout_app/model/workout_session.dart';
 import '../widgets/exercise_tile.dart';
 import '../widgets/add_exercise.dart';

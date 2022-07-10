@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:workout_app/main_theme.dart';
 
 // button to track number of reps in each set of each exercise
 class RepButton extends StatefulWidget {

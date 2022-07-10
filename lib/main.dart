@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 
@@ -43,18 +42,43 @@ class _MyAppState extends State<MyApp> {
       },
       child: Consumer<DarkThemeProvider>(
         builder: (BuildContext context, value, child) {
-          return MaterialApp(
+          return MaterialApp.router(
+            routeInformationProvider: _router.routeInformationProvider,
+            routeInformationParser: _router.routeInformationParser,
+            routerDelegate: _router.routerDelegate,
             debugShowCheckedModeBanner: false,
-            title: 'Flutter Demo',
+            title: 'Workout App',
             theme: ThemeClass.themeData(themeChangeProvider.darkTheme, context),
             themeMode: value.darkTheme ? ThemeMode.dark : ThemeMode.light,
             darkTheme: ThemeClass.mainThemeDark,
-            home: const MyHomePage(title: 'Workout'),
+            // home: const MyHomePage(title: 'Workout'),
           );
         },
       ),
     );
   }
+
+  final GoRouter _router = GoRouter(
+    routes: [
+      GoRoute(
+        path: '/',
+        builder: (BuildContext context, GoRouterState state) =>
+            const MyHomePage(
+          title: 'Workout',
+        ),
+      ),
+      GoRoute(
+        path: '/session',
+        builder: (BuildContext context, GoRouterState state) =>
+            const WorkoutSessionView(),
+      ),
+      GoRoute(
+        path: '/settings',
+        builder: (BuildContext context, GoRouterState state) =>
+            const Settings(),
+      ),
+    ],
+  );
 }
 
 class MyHomePage extends StatefulWidget {
@@ -78,12 +102,13 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const Settings(),
-                ),
-              );
+              context.go('/settings');
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => const Settings(),
+              //   ),
+              // );
             },
             icon: const Icon(
               Icons.settings,
