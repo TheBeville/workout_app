@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../model/exercise_tile_creation_data.dart';
+import '../model/exercise_data.dart';
 
 class AddExercise extends StatefulWidget {
   const AddExercise({Key? key}) : super(key: key);
@@ -92,7 +92,7 @@ class _AddExerciseState extends State<AddExercise> {
           onPressed: () {
             // send data to WorkoutSession to add instance of WorkoutExercise
             Navigator.of(context).pop(
-              ExerciseTileCreationData(
+              ExerciseData(
                 chosenExercise: chosenExercise,
                 numberOfSets: numberOfSets,
                 numberOfReps: numberOfReps,

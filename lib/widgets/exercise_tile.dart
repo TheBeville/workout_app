@@ -1,28 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:workout_app/model/exercise_data.dart';
 
 import './rep_button.dart';
 
 // widget for each exercise in a workout session
 class ExerciseTile extends StatelessWidget {
-  final String chosenExercise;
-  final int numberOfSets;
-  final int numberOfReps;
+  final ExerciseData data;
 
-  const ExerciseTile({
-    Key? key,
-    required this.chosenExercise,
-    required this.numberOfSets,
-    required this.numberOfReps,
-  }) : super(key: key);
+  const ExerciseTile({Key? key, required this.data}) : super(key: key);
 
   // TODO: fill list from user-created template
-  List<RepButton> fillRepList() {
-    List<RepButton> setRepList = [];
-    for (int i = 0; i < numberOfSets; i++) {
-      setRepList.add(RepButton(numOfReps: numberOfReps));
-    }
-    return setRepList;
-  }
+  // List<RepButton> fillRepList() {
+  //   List<RepButton> setRepList = [];
+  //   for (int i = 0; i < numberOfSets; i++) {
+  //     setRepList.add(RepButton(numOfReps: numberOfReps));
+  //   }
+  //   return setRepList;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +34,15 @@ class ExerciseTile extends StatelessWidget {
         children: [
           SizedBox(
               child: Text(
-                chosenExercise,
+                data.chosenExercise,
               ),
               width: MediaQuery.of(context).size.width * 0.2),
           Expanded(
             child: ListView(
               scrollDirection: Axis.horizontal,
               shrinkWrap: true,
-              children: fillRepList(),
+              children: List.generate(data.numberOfSets,
+                  (_) => RepButton(numOfReps: data.numberOfReps)),
             ),
           ),
         ],

@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 
-import 'views/workout_session.dart';
+import 'views/workout_session_view.dart';
 import 'main_theme.dart';
 import './views/settings_view.dart';
 
@@ -47,6 +47,7 @@ class _MyAppState extends State<MyApp> {
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme: ThemeClass.themeData(themeChangeProvider.darkTheme, context),
+            themeMode: value.darkTheme ? ThemeMode.dark : ThemeMode.light,
             darkTheme: ThemeClass.mainThemeDark,
             home: const MyHomePage(title: 'Workout'),
           );
@@ -92,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       body: const Center(
-        child: WorkoutSession(),
+        child: WorkoutSessionView(),
       ),
     );
   }
