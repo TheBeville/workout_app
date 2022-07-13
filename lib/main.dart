@@ -69,14 +69,34 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       GoRoute(
+        path: '/settings',
+        builder: (BuildContext context, GoRouterState state) =>
+            const Settings(),
+      ),
+      GoRoute(
+        path: '/profile',
+        builder: (BuildContext context, GoRouterState state) =>
+            const WorkoutSessionView(),
+      ),
+      GoRoute(
+        path: '/calendar',
+        builder: (BuildContext context, GoRouterState state) =>
+            const WorkoutSessionView(),
+      ),
+      GoRoute(
         path: '/session',
         builder: (BuildContext context, GoRouterState state) =>
             const WorkoutSessionView(),
       ),
       GoRoute(
-        path: '/settings',
+        path: '/history',
         builder: (BuildContext context, GoRouterState state) =>
-            const Settings(),
+            const WorkoutSessionView(),
+      ),
+      GoRoute(
+        path: '/create',
+        builder: (BuildContext context, GoRouterState state) =>
+            const WorkoutSessionView(),
       ),
     ],
   );

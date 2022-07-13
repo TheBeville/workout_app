@@ -48,19 +48,7 @@ class _WorkoutSessionViewState extends State<WorkoutSessionView> {
       context: context,
       builder: (BuildContext context) => const AddExercise(),
     );
-    setState(
-      () {
-        // controller.emit(.add(exerciseTileCreationData));
-        // currentSessionExerciseList.add(
-        //   // fill WorkoutExercise params w/ data returned from AlertDialog
-        // ExerciseTile(
-        //   chosenExercise: exerciseTileCreationData.chosenExercise,
-        //   numberOfSets: exerciseTileCreationData.numberOfSets,
-        //   numberOfReps: exerciseTileCreationData.numberOfReps,
-        // ),
-        // );
-      },
-    );
+    controller.addExercise(exerciseTileCreationData);
   }
 
   @override

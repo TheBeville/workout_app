@@ -9,6 +9,7 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
+  int _selectedIndex = 2;
   List<String> items = [
     'profile',
     'calendar',
@@ -17,14 +18,17 @@ class _BottomNavBarState extends State<BottomNavBar> {
     'create',
   ];
 
-  void bottomNavBarSelect(index) {
-    // TODO: change to context.go when more views added/settings accessible
-    context.push('/${items[index]}');
+  void bottomNavBarSelect(int index) {
+    context.go('/${items[index]}');
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.man),
@@ -47,11 +51,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
           label: 'Create',
         ),
       ],
-      currentIndex: 2,
+      currentIndex: _selectedIndex,
       showUnselectedLabels: true,
       selectedItemColor: Theme.of(context).primaryColor,
       unselectedItemColor: Colors.white,
       onTap: bottomNavBarSelect,
+      backgroundColor: Theme.of(context).backgroundColor,
     );
   }
 }

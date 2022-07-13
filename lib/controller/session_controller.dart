@@ -4,4 +4,10 @@ import 'package:bloc/bloc.dart';
 
 class SessionController extends Cubit<WorkoutSession> {
   SessionController(WorkoutSession initialState) : super(initialState);
+
+  void addExercise(ExerciseData exerciseData) {
+    emit(
+      state.copyWith(exercises: [...state.exercises, exerciseData]),
+    );
+  }
 }

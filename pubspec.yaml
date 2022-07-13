@@ -40,6 +40,9 @@ dependencies:
   bloc: ^8.0.3
   flutter_bloc: ^8.0.1
 
+  # Allows creation of copyWith functions
+  copy_with_extension: ^4.0.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -50,6 +53,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
+  copy_with_extension_gen: ^4.0.2
+  build_runner: ^2.1.7
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
