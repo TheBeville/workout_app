@@ -56,7 +56,9 @@ class _SettingsState extends State<Settings> {
             ),
           ],
         ),
-        bottomNavigationBar: const BottomNavBar(),
+        bottomNavigationBar: BottomNavBar(
+          selectedIndex: 0,
+        ),
       ),
     );
   }

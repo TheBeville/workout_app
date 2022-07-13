@@ -85,7 +85,9 @@ class _WorkoutSessionViewState extends State<WorkoutSessionView> {
               ),
             ),
           ),
-          bottomNavigationBar: const BottomNavBar(),
+          bottomNavigationBar: BottomNavBar(
+            selectedIndex: 2,
+          ),
         );
       },
     );

@@ -1,32 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({Key? key}) : super(key: key);
+class BottomNavBar extends StatelessWidget {
+  int selectedIndex;
 
-  @override
-  State<BottomNavBar> createState() => _BottomNavBarState();
-}
+  BottomNavBar({Key? key, required this.selectedIndex}) : super(key: key);
 
-class _BottomNavBarState extends State<BottomNavBar> {
-  int _selectedIndex = 2;
   List<String> items = [
     'profile',
     'calendar',
     'session',
-    'history',
+    'progress',
     'create',
   ];
 
-  void bottomNavBarSelect(int index) {
-    context.go('/${items[index]}');
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    void bottomNavBarSelect(int index) {
+      context.go('/${items[index]}');
+      // setState(() {
+      selectedIndex = index;
+      // });
+    }
+
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       items: const <BottomNavigationBarItem>[
@@ -44,14 +40,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.trending_up),
-          label: 'History',
+          label: 'Progress',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.add),
           label: 'Create',
         ),
       ],
-      currentIndex: _selectedIndex,
+      currentIndex: selectedIndex,
       showUnselectedLabels: true,
       selectedItemColor: Theme.of(context).primaryColor,
       unselectedItemColor: Colors.white,

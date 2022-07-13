@@ -6,6 +6,10 @@ import 'views/workout_session_view.dart';
 import 'main_theme.dart';
 import './views/settings_view.dart';
 import './widgets/bottom_nav_bar.dart';
+import './views/calendar_view.dart';
+import './views/profile_view.dart';
+import './views/progress_view.dart';
+import './views/create_session_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -76,12 +80,12 @@ class _MyAppState extends State<MyApp> {
       GoRoute(
         path: '/profile',
         builder: (BuildContext context, GoRouterState state) =>
-            const WorkoutSessionView(),
+            const ProfileView(),
       ),
       GoRoute(
         path: '/calendar',
         builder: (BuildContext context, GoRouterState state) =>
-            const WorkoutSessionView(),
+            const CalendarView(),
       ),
       GoRoute(
         path: '/session',
@@ -89,14 +93,14 @@ class _MyAppState extends State<MyApp> {
             const WorkoutSessionView(),
       ),
       GoRoute(
-        path: '/history',
+        path: '/progress',
         builder: (BuildContext context, GoRouterState state) =>
-            const WorkoutSessionView(),
+            const ProgressView(),
       ),
       GoRoute(
         path: '/create',
         builder: (BuildContext context, GoRouterState state) =>
-            const WorkoutSessionView(),
+            const CreateSessionView(),
       ),
     ],
   );
@@ -135,7 +139,9 @@ class _MyHomePageState extends State<MyHomePage> {
       body: const Center(
         child: Text('Welcome'),
       ),
-      bottomNavigationBar: const BottomNavBar(),
+      bottomNavigationBar: BottomNavBar(
+        selectedIndex: 0,
+      ),
     );
   }
 }
