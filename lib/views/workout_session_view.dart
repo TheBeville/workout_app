@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workout_app/controller/session_controller.dart';
 import 'package:workout_app/model/workout_session.dart';
+import 'package:workout_app/widgets/bottom_nav_bar.dart';
 import '../widgets/exercise_tile.dart';
 import '../widgets/add_exercise.dart';
 import '../model/exercise_data.dart';
@@ -49,13 +50,14 @@ class _WorkoutSessionViewState extends State<WorkoutSessionView> {
     );
     setState(
       () {
+        // controller.emit(.add(exerciseTileCreationData));
         // currentSessionExerciseList.add(
         //   // fill WorkoutExercise params w/ data returned from AlertDialog
-        //   ExerciseTile(
-        //     chosenExercise: exerciseTileCreationData.chosenExercise,
-        //     numberOfSets: exerciseTileCreationData.numberOfSets,
-        //     numberOfReps: exerciseTileCreationData.numberOfReps,
-        //   ),
+        // ExerciseTile(
+        //   chosenExercise: exerciseTileCreationData.chosenExercise,
+        //   numberOfSets: exerciseTileCreationData.numberOfSets,
+        //   numberOfReps: exerciseTileCreationData.numberOfReps,
+        // ),
         // );
       },
     );
@@ -66,28 +68,36 @@ class _WorkoutSessionViewState extends State<WorkoutSessionView> {
     return BlocBuilder<SessionController, WorkoutSession>(
       bloc: controller,
       builder: (context, state) {
-        return Align(
-          alignment: Alignment.topCenter,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: state.exercises
-                      .map((e) => ExerciseTile(data: e))
-                      .toList(),
-                ),
-                TextButton(
-                  // brings up AlertDialog to choose exercise to add to session
-                  onPressed: userSelectExercise,
-                  child: Icon(
-                    Icons.add,
-                    color: Theme.of(context).primaryColor,
+        return Scaffold(
+          backgroundColor: Theme.of(context).backgroundColor,
+          appBar: AppBar(
+            centerTitle: true,
+            title: const Text('Session'),
+          ),
+          body: Align(
+            alignment: Alignment.topCenter,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: state.exercises
+                        .map((e) => ExerciseTile(data: e))
+                        .toList(),
                   ),
-                ),
-              ],
+                  TextButton(
+                    // brings up AlertDialog to choose exercise to add to session
+                    onPressed: userSelectExercise,
+                    child: Icon(
+                      Icons.add,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
+          bottomNavigationBar: const BottomNavBar(),
         );
       },
     );

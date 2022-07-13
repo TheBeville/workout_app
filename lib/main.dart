@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'views/workout_session_view.dart';
 import 'main_theme.dart';
 import './views/settings_view.dart';
+import './widgets/bottom_nav_bar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -51,13 +52,13 @@ class _MyAppState extends State<MyApp> {
             theme: ThemeClass.themeData(themeChangeProvider.darkTheme, context),
             themeMode: value.darkTheme ? ThemeMode.dark : ThemeMode.light,
             darkTheme: ThemeClass.mainThemeDark,
-            // home: const MyHomePage(title: 'Workout'),
           );
         },
       ),
     );
   }
 
+  // defines the go_router routes for the app
   final GoRouter _router = GoRouter(
     routes: [
       GoRoute(
@@ -102,13 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: [
           IconButton(
             onPressed: () {
-              context.go('/settings');
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => const Settings(),
-              //   ),
-              // );
+              context.push('/settings');
             },
             icon: const Icon(
               Icons.settings,
@@ -118,8 +113,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       body: const Center(
-        child: WorkoutSessionView(),
+        child: Text('Welcome'),
       ),
+      bottomNavigationBar: const BottomNavBar(),
     );
   }
 }

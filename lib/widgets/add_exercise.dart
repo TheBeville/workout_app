@@ -25,10 +25,14 @@ class _AddExerciseState extends State<AddExercise> {
             value: chosenExercise,
             items: <String>[
               'Please Select',
-              'Bench Press',
               'Back Squat',
-              'Deadlift',
+              'Barbell Row',
+              'Bench Press',
               'Bicep Curl',
+              'Deadlift',
+              'Overhead Press',
+              'Pullups',
+              'Tricep Extension',
             ].map<DropdownMenuItem<String>>(
               (String value) {
                 return DropdownMenuItem<String>(

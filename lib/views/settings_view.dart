@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:workout_app/main_theme.dart';
+import '../widgets/bottom_nav_bar.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
@@ -55,6 +56,7 @@ class _SettingsState extends State<Settings> {
             ),
           ],
         ),
+        bottomNavigationBar: const BottomNavBar(),
       ),
     );
   }
