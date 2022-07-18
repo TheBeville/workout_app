@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../widgets/bottom_nav_bar.dart';
 
@@ -19,8 +20,42 @@ class _ProfileViewState extends State<ProfileView> {
         title: const Text(
           'Profile',
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.push('/settings');
+            },
+            icon: const Icon(
+              Icons.settings,
+              color: Colors.white,
+            ),
+          ),
+        ],
       ),
-      body: const Center(child: Text('Profile')),
+      body: Center(
+        child: Row(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: const [
+                Text('Name:'),
+                Text('Height:'),
+                Text('Weight:'),
+              ],
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text('The User'),
+                Text('178cm'),
+                Text('73kg'),
+              ],
+            ),
+          ],
+        ),
+      ),
       bottomNavigationBar: BottomNavBar(
         selectedIndex: 0,
       ),
